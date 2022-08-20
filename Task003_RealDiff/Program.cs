@@ -19,7 +19,7 @@ int Prompt(string message)
 }
 
 //распечатка массива
-void PrintArray (int[] col)
+void PrintArray (double[] col)
 {
 
     int count=col.Length;
@@ -41,31 +41,38 @@ void PrintArray (int[] col)
 double RandomMinMax(int size, int min, int max)
 {
     double[] array=new double[size];
-    double min=0;
-    double max=0;
-    Random rnd=new Random();
+    double min_el=0;
+    double max_el=0;
 
     for(int i=0;i<array.Length;i++)
     {
-        array[i]=(min+min*0.2+i)/(max+max*0.3-i);
-  
+        array[i]=((min+max*2.2+i)/(min+max*3.3-i))*100;
+        if(i==0) 
+        {
+             min_el=array[i];
+             max_el=array[i];   
+        }
+        else
+        {
+            if (array[i]>max_el) max_el=array[i];
+            if (array[i]<min_el) min_el=array[i];
+        }
+
     }
 
-     double min=array[0];
-    double max=array[0];
-
-
-    PrintArray(array);
+      
+      PrintArray(array);
+    
        
 
-    return answer;
+    return max_el-min_el;
 
 
 }
 
 
-int OddSum=RandomOddSum(Prompt("enter array size: "),Prompt("Enter min threshold: "), Prompt("Enter max threshold: "));
-System.Console.Write ($" sum of odd-placed elements: {OddSum}");
+double diff=RandomMinMax(Prompt("enter array size: "),Prompt("Enter min threshold: "), Prompt("Enter max threshold: "));
+System.Console.Write ($" difference between max and min array elements is: {diff}");
 
 
 
